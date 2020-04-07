@@ -9,5 +9,10 @@ namespace ITCompany.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public Problem(string name)
+        {
+            Name = name;
+        }
     }
 }

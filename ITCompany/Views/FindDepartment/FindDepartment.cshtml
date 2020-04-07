@@ -1,7 +1,7 @@
 ﻿
 @{
-    @model IEnumerable<Employee>;
-    ViewData["Title"] = "Find Employee";
+    @model IEnumerable<Department>;
+    ViewData["Title"] = "Find Department";
 }
 
 <!DOCTYPE html>
@@ -10,22 +10,21 @@
 
 <body>
     <h2>
-        Find Employee
+        Find department
     </h2>
     <form method="post">
         <label>Input your option</label><br />
         <input type="text" name="option" /><br /><br />
         <select name="findtype">
             <option value="Name">Find by name</option>
-            <option value="Date">Find by date of birth</option>
+            <option value="Employee">Find by date of birth</option>
             <option value="Problem">Find by problem</option>
-            <option value="DepName">Find by department name</option>
         </select>
         <input type="submit" value="Find" />
     </form>
-    @foreach (Employee emp in Model)
+    @foreach (Department dep in Model)
     {
-        <label>@emp.Name</label><br />
+        <label>@dep.Name</label><br />
     }
 </body>
 </html>

@@ -1,0 +1,30 @@
+﻿
+@{EmployeeParameters parameters = new EmployeeParameters(); }
+
+<!DOCTYPE html>
+
+<html>
+<body>
+    <h2>
+        Create employee
+    </h2>
+    <form method="post">
+        <label>Input create options</label><br />
+        <label>Input name</label><br />
+        <input type="text" name="name" /><br /><br />
+        <label>Input date of birth</label><br />
+        <input type="text" name="date" /><br /><br />
+        <label>Input departure name</label><br />
+        <input type="text" name="depName" /><br /><br />
+        <label>Add problem to employee problem-list</label><br />
+        <input type="text", name="problem" />
+        <input type="submit" value="Create" />
+    </form>
+    <input type="button" value="Add problem" onclick="addProblem()" />
+    <script>
+        function addProblem() {
+            
+        }
+    </script>
+</body>
+</html>

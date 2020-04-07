@@ -10,10 +10,18 @@ namespace ITCompany.Services
     public class EmployeeService
     {
         UnitOfWork unitOfWork;
+
+
+        //delegate IEnumerable<Employee> FindMethod(string option);
         public EmployeeService(UnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
+
+        //public IEnumerable<Employee> GetByOption(string option)
+        //{
+            
+        //}
 
         public IEnumerable<Employee> FindByName(string name)
         {
@@ -21,7 +29,7 @@ namespace ITCompany.Services
             return employees.Where(e => e.Name.Equals(name));
         }
 
-        public IEnumerable<Employee> FindByDate(DateTime date)
+        public IEnumerable<Employee> FindByDate(string date)
         {
             var employees = unitOfWork.EmployeeRepository.GetAll();
             return employees.Where(e => e.DateOfBirth == date);
