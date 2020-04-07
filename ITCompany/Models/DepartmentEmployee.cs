@@ -12,5 +12,13 @@ namespace ITCompany.Models
         public int EmployeeId { get; set; }
         public Department Department { get; set; }
         public Employee Employee { get; set; }
+
+        public DepartmentEmployee(int dId, int eId, Department department, Employee employee)
+        {
+            DepartmentId = dId;
+            EmployeeId = eId;
+            Department = department;
+            Employee = employee;
+        }
     }
 }
