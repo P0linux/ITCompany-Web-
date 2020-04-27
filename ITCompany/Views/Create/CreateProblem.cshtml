@@ -1,0 +1,21 @@
+﻿
+@{
+    @model Problem;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<body>
+    <h2>
+        Create problem
+    </h2>
+    <form method="post" action="CreateProblem">
+        <label> Input create options</label> <br />
+        <label> Input name</label>
+        @Html.EditorFor(m => m.Name)<br />
+        <input type="submit" value="Create" />
+    </form>
+</body>
+</html>

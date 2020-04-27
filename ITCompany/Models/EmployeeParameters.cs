@@ -9,7 +9,7 @@ namespace ITCompany.Models
     {
         public string Name { get; set; }
         public string DateOfBirth { get; set; }
-        public List<string> Problems { get; set; }
+        public List<string> Problems { get; set; } = new List<string>();
         public string DepartmentName { get; set; }
     }
 }

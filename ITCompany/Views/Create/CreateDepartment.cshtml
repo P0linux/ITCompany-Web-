@@ -1,0 +1,22 @@
+﻿
+@{ 
+    @model Department
+}
+<!DOCTYPE html>
+
+<html>
+
+<body>
+    <h2>
+        Create department
+    </h2>
+    <form method="post" action="CreateDepartment">
+        <label> Input create options</label> <br />
+        <label> Input name</label>
+        @Html.EditorFor(m => m.Name)<br />
+        <input type="submit" value="Create" />
+    </form>
+
+    <label>@Model.Name</label>
+</body>
+</html>

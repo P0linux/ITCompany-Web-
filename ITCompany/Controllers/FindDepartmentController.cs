@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ITCompany.Business.Services;
 using ITCompany.Models;
-using ITCompany.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITCompany.Controllers
@@ -30,7 +30,7 @@ namespace ITCompany.Controllers
 
         private IEnumerable<Department> GetByOption(string option, string findtype)
         {
-            Data.LoadData();
+            //Data.LoadData();
             switch (findtype)
             {
                 case "Name":

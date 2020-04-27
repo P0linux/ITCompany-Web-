@@ -1,5 +1,7 @@
 ﻿
-@{EmployeeParameters parameters = new EmployeeParameters(); }
+@{ 
+    @model EmployeeParameters;
+}
 
 <!DOCTYPE html>
 
@@ -8,23 +10,23 @@
     <h2>
         Create employee
     </h2>
-    <form method="post">
-        <label>Input create options</label><br />
-        <label>Input name</label><br />
-        <input type="text" name="name" /><br /><br />
-        <label>Input date of birth</label><br />
-        <input type="text" name="date" /><br /><br />
-        <label>Input departure name</label><br />
-        <input type="text" name="depName" /><br /><br />
-        <label>Add problem to employee problem-list</label><br />
-        <input type="text", name="problem" />
+    <form method="post" action="CreateEmployee">
+        <label> Input create options</label> <br />
+        <label> Input name</label>
+        @Html.EditorFor(m => m.Name)<br />
+        <label> Input date of birth</label>
+        @Html.EditorFor(m => m.DateOfBirth)<br />
+        <label> Input departure name</label>
+        @Html.EditorFor(m => m.DepartmentName)<br />
+        <label> Add problem to employee problem-list</label>
+        <input type="text" name="problems" /><br />
         <input type="submit" value="Create" />
+
     </form>
-    <input type="button" value="Add problem" onclick="addProblem()" />
-    <script>
-        function addProblem() {
-            
-        }
-    </script>
+
+    @foreach (string problem in Model.Problems)
+    {
+        <label>@problem</label>
+    }
 </body>
 </html>

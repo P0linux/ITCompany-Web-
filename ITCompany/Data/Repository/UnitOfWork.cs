@@ -3,20 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ITCompany.Repository
+namespace ITCompany.Data.Repository
 {
     public class UnitOfWork
     {
+        private readonly ApplicationContext context;
         private DepartmentRepository departmentRepository;
         private EmployeeRepository employeeRepository;
         private ProblemRepository problemRepository;
         private DepartmentEmployeeRepository departmentEmployeeRepository;
 
+        public UnitOfWork(ApplicationContext context)
+        {
+            this.context = context;
+        }
+
         public DepartmentRepository DepartmentRepository
         {
             get
             {
-                return departmentRepository ?? (departmentRepository = new DepartmentRepository());
+                return departmentRepository ?? (departmentRepository = new DepartmentRepository(context));
             }
         }
 
@@ -24,7 +30,7 @@ namespace ITCompany.Repository
         {
             get
             {
-                return employeeRepository ?? (employeeRepository = new EmployeeRepository());
+                return employeeRepository ?? (employeeRepository = new EmployeeRepository(context));
             }
         }
 
@@ -32,7 +38,7 @@ namespace ITCompany.Repository
         {
             get
             {
-                return problemRepository ?? (problemRepository = new ProblemRepository());
+                return problemRepository ?? (problemRepository = new ProblemRepository(context));
             }
         }
 
@@ -40,7 +46,7 @@ namespace ITCompany.Repository
         {
             get
             {
-                return departmentEmployeeRepository ?? (departmentEmployeeRepository = new DepartmentEmployeeRepository());
+                return departmentEmployeeRepository ?? (departmentEmployeeRepository = new DepartmentEmployeeRepository(context));
             }
         }
 

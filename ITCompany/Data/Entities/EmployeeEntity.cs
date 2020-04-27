@@ -3,18 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ITCompany.Models
+namespace ITCompany.Data.Entities
 {
-    public class Problem
+    public class EmployeeEntity : IBaseEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
-        public Problem(string name)
-        {
-            Name = name;
-        }
-
-        public Problem() { }
+        public string DateOfBirth { get; set; }
+        public ICollection<ProblemEntity> Problems { get; set; }
     }
 }

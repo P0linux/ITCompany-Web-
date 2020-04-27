@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ITCompany.Repository;
+using AutoMapper;
+using ITCompany.Business;
+using ITCompany.Data;
+using ITCompany.Data.Repository;
 using ITCompany.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -35,6 +39,8 @@ namespace ITCompany
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ITCompany")));
+            services.AddSingleton(new MapperConfiguration(conf => conf.AddProfile(new AutoMapperProfile())).CreateMapper());
             services.AddSingleton<UnitOfWork, UnitOfWork>();
             services.AddTransient<EmployeeService, EmployeeService>();
             services.AddTransient<DepartmentService, DepartmentService>();
