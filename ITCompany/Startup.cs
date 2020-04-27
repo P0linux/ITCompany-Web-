@@ -4,9 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using ITCompany.Business;
+using ITCompany.Business.Interfaces;
+using ITCompany.Business.Services;
 using ITCompany.Data;
 using ITCompany.Data.Repository;
-using ITCompany.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -41,10 +42,10 @@ namespace ITCompany
 
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ITCompany")));
             services.AddSingleton(new MapperConfiguration(conf => conf.AddProfile(new AutoMapperProfile())).CreateMapper());
-            services.AddSingleton<UnitOfWork, UnitOfWork>();
-            services.AddTransient<EmployeeService, EmployeeService>();
-            services.AddTransient<DepartmentService, DepartmentService>();
-            services.AddTransient<CreatorService, CreatorService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IEmployeeService, EmployeeService>();
+            services.AddTransient<IDepartmentService, DepartmentService>();
+            services.AddTransient<ICreatorService, CreatorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

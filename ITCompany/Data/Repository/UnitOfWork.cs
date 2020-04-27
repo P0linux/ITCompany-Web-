@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ITCompany.Data.Repository
 {
-    public class UnitOfWork
+    public class UnitOfWork:IUnitOfWork
     {
         private readonly ApplicationContext context;
         private DepartmentRepository departmentRepository;
@@ -50,5 +50,9 @@ namespace ITCompany.Data.Repository
             }
         }
 
+        public void Commit()
+        {
+            context.SaveChanges();
+        }
     }
 }

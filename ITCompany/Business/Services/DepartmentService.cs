@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ITCompany.Business.Interfaces;
 using ITCompany.Data.Repository;
 using ITCompany.Models;
 using System;
@@ -8,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace ITCompany.Business.Services
 {
-    public class DepartmentService
+    public class DepartmentService: IDepartmentService
     {
-        UnitOfWork unitOfWork;
-        EmployeeService employeeService;
+        IUnitOfWork unitOfWork;
+        IEmployeeService employeeService;
         IMapper mapper;
-        public DepartmentService(UnitOfWork unitOfWork, EmployeeService employeeService, IMapper mapper)
+        public DepartmentService(IUnitOfWork unitOfWork, IEmployeeService employeeService, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
             this.employeeService = employeeService;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ITCompany.Business.Interfaces;
 using ITCompany.Business.Services;
 using ITCompany.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -11,8 +12,8 @@ namespace ITCompany.Controllers
     public class CreateController : Controller
     {
         
-        CreatorService creatorService;
-        public CreateController(CreatorService creatorService)
+        ICreatorService creatorService;
+        public CreateController(ICreatorService creatorService)
         {
             this.creatorService = creatorService;
         }

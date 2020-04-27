@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ITCompany.Business.Interfaces;
 using ITCompany.Business.Services;
 using ITCompany.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,8 +11,8 @@ namespace ITCompany.Controllers
 {
     public class FindDepartmentController : Controller
     {
-        DepartmentService departmentService;
-        public FindDepartmentController(DepartmentService employeeService)
+        IDepartmentService departmentService;
+        public FindDepartmentController(IDepartmentService employeeService)
         {
             this.departmentService = employeeService;
         }

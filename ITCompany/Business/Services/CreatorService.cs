@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ITCompany.Business.Interfaces;
 using ITCompany.Data.Entities;
 using ITCompany.Data.Repository;
 using ITCompany.Models;
@@ -9,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace ITCompany.Business.Services
 {
-    public class CreatorService
+    public class CreatorService: ICreatorService
     {
-        UnitOfWork unitOfWork;
+        IUnitOfWork unitOfWork;
         IMapper mapper;
-        DepartmentService departmentService;
-        public CreatorService(UnitOfWork unitOfWork, IMapper mapper, DepartmentService departmentService)
+        IDepartmentService departmentService;
+        public CreatorService(IUnitOfWork unitOfWork, IMapper mapper, IDepartmentService departmentService)
         {
             this.departmentService = departmentService;
             this.unitOfWork = unitOfWork;
@@ -25,6 +26,7 @@ namespace ITCompany.Business.Services
         {
             var dep = mapper.Map<DepartmentEntity>(department);
             unitOfWork.DepartmentRepository.Insert(dep);
+            unitOfWork.Commit();
         }
 
         public void CreateEmployee(EmployeeParameters parameters)
@@ -34,13 +36,14 @@ namespace ITCompany.Business.Services
             var employee = mapper.Map<EmployeeEntity>(emp);
             unitOfWork.EmployeeRepository.Insert(employee);
             CreateDepartmentEmployee(parameters, emp);
+            unitOfWork.Commit();
         }
 
         private IEnumerable<Problem> CreateListOfProblems(EmployeeParameters parameters)
         {
             var problems = unitOfWork.ProblemRepository.GetAll();
             IEnumerable<Problem> prob = mapper.Map<IEnumerable<Problem>>(problems);
-            return prob.Where(p => parameters.Problems.Contains(p.Name)).ToList(); ;
+            return prob.Where(p => parameters.Problems.Contains(p.Name)).ToList(); 
         }
 
         private void CreateDepartmentEmployee(EmployeeParameters parameters, Employee emp)
@@ -58,6 +61,7 @@ namespace ITCompany.Business.Services
         {
             var pr = mapper.Map<ProblemEntity>(problem);
             unitOfWork.ProblemRepository.Insert(pr);
+            unitOfWork.Commit();
         }
     }
 }

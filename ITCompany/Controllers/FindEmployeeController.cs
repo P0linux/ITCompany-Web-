@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ITCompany.Business.Interfaces;
 using ITCompany.Business.Services;
 using ITCompany.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,8 +11,8 @@ namespace ITCompany.Controllers
 {
     public class FindEmployeeController : Controller
     {
-        EmployeeService employeeService;
-        public FindEmployeeController(EmployeeService employeeService)
+        IEmployeeService employeeService;
+        public FindEmployeeController(IEmployeeService employeeService)
         {
             this.employeeService = employeeService;
         }
