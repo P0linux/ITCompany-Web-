@@ -10,6 +10,6 @@ namespace ITCompany.Business.Interfaces
     {
         void CreateDepartment(Department department);
         void CreateEmployee(EmployeeParameters parameters);
-        void CreateProblem(Problem problem);
+        void CreateProblem(Problem problem, string employeeName);
     }
 }

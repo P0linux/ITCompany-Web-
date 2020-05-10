@@ -13,7 +13,7 @@ namespace ITCompany.Business.Services
     {
         IUnitOfWork unitOfWork;
         IMapper mapper;
-
+        
       
         public EmployeeService(IUnitOfWork unitOfWork, IMapper mapper)
         {
@@ -38,17 +38,20 @@ namespace ITCompany.Business.Services
 
         public IEnumerable<Employee> FindByProblem(string problemName)
         {
-            var employees = unitOfWork.EmployeeRepository.GetAll();
+            var employees = unitOfWork.EmployeeRepository.GetAll().ToList();
+            var problemsByEmployeeId = unitOfWork.ProblemRepository.GetAll().Select(p => p.EmployeeId).ToList();
             IEnumerable<Employee> emp = mapper.Map<IEnumerable<Employee>>(employees);
-            return emp.SelectMany(e => e.Problems, (employee, problem) => new { employee, problem})
-                .Where(e => e.problem.Name == problemName).Select(e => e.employee);
+            return emp.Where(e => problemsByEmployeeId.Contains(e.Id)).ToList();
         }
 
         public IEnumerable<Employee> FindByDepartmentName(string name)
         {
-            var departmentEmployees = unitOfWork.DepartmentEmployeeRepository.GetAll();
-            IEnumerable<DepartmentEmployee> emp = mapper.Map<IEnumerable<DepartmentEmployee>>(departmentEmployees);
-            return emp.Where(d => d.Department.Name.Equals(name)).Select(d => d.Employee);
+            var departmentEmployees = unitOfWork.DepartmentEmployeeRepository.GetAll().ToList();
+            var departments = unitOfWork.DepartmentRepository.GetAll().ToList();
+            var employees = unitOfWork.EmployeeRepository.GetAll().ToList();
+            var depByName = departments.Where(d => d.Name == name).First();
+            var empId = departmentEmployees.Where(d => d.DepartmentId == depByName.Id).Select(d => d.EmployeeId);
+            return mapper.Map<List<Employee>>(empId.Select(e => unitOfWork.EmployeeRepository.GetById(e)));
         }
     }
 }

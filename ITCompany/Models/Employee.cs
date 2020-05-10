@@ -12,6 +12,7 @@ namespace ITCompany.Models
         public string DateOfBirth { get; set; }
         public List<Problem> Problems { get; set; } = new List<Problem>();
 
+        public Employee() { }
         public Employee(string name, string date)
         {
             Name = name;

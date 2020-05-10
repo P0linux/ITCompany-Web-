@@ -15,11 +15,13 @@ namespace ITCompany.Business.Services
         IUnitOfWork unitOfWork;
         IMapper mapper;
         IDepartmentService departmentService;
-        public CreatorService(IUnitOfWork unitOfWork, IMapper mapper, IDepartmentService departmentService)
+        IEmployeeService employeeService;
+        public CreatorService(IUnitOfWork unitOfWork, IMapper mapper, IDepartmentService departmentService, IEmployeeService employeeService)
         {
             this.departmentService = departmentService;
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
+            this.employeeService = employeeService;
         }
 
         public void CreateDepartment(Department department)
@@ -32,33 +34,27 @@ namespace ITCompany.Business.Services
         public void CreateEmployee(EmployeeParameters parameters)
         {
             Employee emp = new Employee(parameters.Name, parameters.DateOfBirth);
-            emp.Problems = CreateListOfProblems(parameters).ToList();
             var employee = mapper.Map<EmployeeEntity>(emp);
             unitOfWork.EmployeeRepository.Insert(employee);
-            CreateDepartmentEmployee(parameters, emp);
             unitOfWork.Commit();
+            CreateDepartmentEmployee(parameters);
+
         }
 
-        private IEnumerable<Problem> CreateListOfProblems(EmployeeParameters parameters)
+        private void CreateDepartmentEmployee(EmployeeParameters parameters)
         {
-            var problems = unitOfWork.ProblemRepository.GetAll();
-            IEnumerable<Problem> prob = mapper.Map<IEnumerable<Problem>>(problems);
-            return prob.Where(p => parameters.Problems.Contains(p.Name)).ToList(); 
-        }
-
-        private void CreateDepartmentEmployee(EmployeeParameters parameters, Employee emp)
-        {
-            //var departments = unitOfWork.DepartmentRepository.GetAll();
-            //IEnumerable<Department> department = mapper.Map<IEnumerable<Department>>(departments);
-            //Department dep = department.FirstOrDefault(d => d.Name.Equals(parameters.DepartmentName));
+            Employee emp = employeeService.FindByName(parameters.Name).First();
             Department dep = departmentService.FindByName(parameters.DepartmentName).First();
             DepartmentEmployee departmentEmployee = new DepartmentEmployee(dep.Id, emp.Id);
             var depemp = mapper.Map<DepartmentEmployeeEntity>(departmentEmployee);
             unitOfWork.DepartmentEmployeeRepository.Insert(depemp);
+            unitOfWork.Commit();
         }
 
-        public void CreateProblem(Problem problem)
+        public void CreateProblem(Problem problem, string employeeName)
         {
+            var employees = unitOfWork.EmployeeRepository.GetAll();
+            problem.EmployeeId = employees.Where(e => e.Name.Equals(employeeName)).First().Id;
             var pr = mapper.Map<ProblemEntity>(problem);
             unitOfWork.ProblemRepository.Insert(pr);
             unitOfWork.Commit();

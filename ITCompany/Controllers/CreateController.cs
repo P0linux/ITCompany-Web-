@@ -24,9 +24,9 @@ namespace ITCompany.Controllers
             return View("CreateEmployee", new EmployeeParameters());
         }
         [HttpPost]
-        public ActionResult CreateEmployee(string problems, EmployeeParameters parameters)
+        public ActionResult CreateEmployee(/*string problems,*/ EmployeeParameters parameters)
         {
-            parameters.Problems = problems.Split(",").ToList();
+            //parameters.Problems = problems.Split(",").ToList();
             creatorService.CreateEmployee(parameters);
             return RedirectToAction("CreateEmployee");
         }
@@ -51,9 +51,9 @@ namespace ITCompany.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateProblem(Problem problem)
+        public ActionResult CreateProblem(Problem problem, string employeeName)
         {
-            creatorService.CreateProblem(problem);
+            creatorService.CreateProblem(problem, employeeName);
             return RedirectToAction("CreateProblem");
         }
     }
