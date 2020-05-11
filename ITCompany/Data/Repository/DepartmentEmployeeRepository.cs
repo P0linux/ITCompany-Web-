@@ -23,7 +23,7 @@ namespace ITCompany.Data.Repository
 
         public IEnumerable<DepartmentEmployeeEntity> GetAll()
         {
-            return departmentEmployees;
+            return departmentEmployees.Include(de => de.Department).Include(de => de.Employee);
         }
 
         public DepartmentEmployeeEntity GetById(int Id)

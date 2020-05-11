@@ -13,7 +13,7 @@ namespace ITCompany.Data.Repository
         DbSet<EmployeeEntity> employees;
         public EmployeeRepository(ApplicationContext context)
         {
-            employees = context.Set<EmployeeEntity>();
+            employees = context.Set<EmployeeEntity>();           
         }
         public void DeleteById(int Id)
         {

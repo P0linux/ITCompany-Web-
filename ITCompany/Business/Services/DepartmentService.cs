@@ -41,10 +41,12 @@ namespace ITCompany.Business.Services
         public IEnumerable<Department> FindByEmployee(string employeeName)
         {
             var departmentEmployees = unitOfWork.DepartmentEmployeeRepository.GetAll();
-            var employeeByName = unitOfWork.EmployeeRepository.GetAll().Where(e => e.Name == employeeName).First();
-            var departments = unitOfWork.DepartmentRepository.GetAll();
-            var depId = departmentEmployees.Where(d => d.EmployeeId == employeeByName.Id).Select(d => d.DepartmentId).Distinct();
-            return mapper.Map<List<Department>>(departments.Where(d => depId.Contains(d.Id)));
+            var department = departmentEmployees.Where(de => de.Employee.Name == employeeName).Select(de => de.Department);
+            return mapper.Map<List<Department>>(department);
+            //var employeeByName = unitOfWork.EmployeeRepository.GetAll().Where(e => e.Name == employeeName).First();
+            //var departments = unitOfWork.DepartmentRepository.GetAll();
+            //var depId = departmentEmployees.Where(d => d.EmployeeId == employeeByName.Id).Select(d => d.DepartmentId).Distinct();
+            //return mapper.Map<List<Department>>(departments.Where(d => depId.Contains(d.Id)));
         }
     }
 }
