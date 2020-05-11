@@ -24,7 +24,7 @@ namespace WebApiApp.Data.Repositories
         public IEnumerable<DepartmentEmployee> GetAll()
         {
             //TEST LINE (DELETE OR REDO)
-            return departmentEmployees.Include(de => de.Department).Include(de => de.Employee);
+            return departmentEmployees.Include(de => de.Department).Include(de => de.Employee).AsNoTracking();
         }
 
         public DepartmentEmployee GetById(int Id)

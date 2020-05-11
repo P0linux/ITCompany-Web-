@@ -11,6 +11,7 @@ namespace WebApiApp.Data.Repositories
     public class ProblemRepository:IProblemRepository
     {
         DbSet<Problem> problems;
+        
         public ProblemRepository(ApplicationContext context)
         {
             problems = context.Set<Problem>();
@@ -23,7 +24,7 @@ namespace WebApiApp.Data.Repositories
 
         public IEnumerable<Problem> GetAll()
         {
-            return problems;
+            return problems.AsNoTracking();
         }
 
         public Problem GetById(int Id)

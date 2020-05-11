@@ -23,7 +23,7 @@ namespace WebApiApp.Data.Repositories
 
         public IEnumerable<Employee> GetAll()
         {
-            return employees;
+            return employees.AsNoTracking();
         }
 
         public Employee GetById(int Id)

@@ -46,11 +46,11 @@ namespace WebApiApp.Controllers
             return Ok(problem);
         }
 
-        [HttpPut("{Id}")]
-        public ActionResult<ProblemModel> Put(int Id, [FromBody]ProblemModel problem)
+        [HttpPut]
+        public ActionResult<ProblemModel> Put([FromBody]ProblemModel problem)
         {
             if (problem == null) return BadRequest();
-            if (unitOfWork.ProblemRepository.GetById(Id) == null) return NotFound();
+            if (!unitOfWork.ProblemRepository.GetAll().Any(p => p.Id == problem.Id)) return NotFound();
             unitOfWork.ProblemRepository.Update(mapper.Map<Problem>(problem));
             unitOfWork.Commit();
             return Ok(problem);
