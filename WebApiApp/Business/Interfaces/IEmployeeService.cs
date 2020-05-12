@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using WebApiApp.Data.Entities;
 using WebApiApp.Models;
 
-namespace WebApiApp.Business
+namespace WebApiApp.Business.Interfaces
 {
     public interface IEmployeeService
     {

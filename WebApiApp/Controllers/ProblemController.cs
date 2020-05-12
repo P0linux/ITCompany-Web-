@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApiApp.Business.Interfaces;
 using WebApiApp.Data;
 using WebApiApp.Data.Entities;
 using WebApiApp.Models;
@@ -15,24 +16,22 @@ namespace WebApiApp.Controllers
     [ApiController]
     public class ProblemController : ControllerBase
     {
-        IUnitOfWork unitOfWork;
-        IMapper mapper;
-        public ProblemController(IUnitOfWork unitOfWork, IMapper mapper)
+        IProblemService problemService;
+        public ProblemController(IProblemService service)
         {
-            this.unitOfWork = unitOfWork;
-            this.mapper = mapper;
+            problemService = service;
         }
 
         [HttpGet]
         public IEnumerable<ProblemModel> Get()
         {
-            return mapper.Map<List<ProblemModel>>(unitOfWork.ProblemRepository.GetAll());
+            return problemService.GetAll();
         }
 
         [HttpGet("{id}")]
         public ActionResult<ProblemModel> Get(int id)
         {
-            ProblemModel problem = mapper.Map<ProblemModel>(unitOfWork.ProblemRepository.GetById(id));
+            ProblemModel problem = problemService.GetById(id);
             if (problem == null) return NotFound();
             return new ObjectResult(problem);
         }
@@ -41,8 +40,7 @@ namespace WebApiApp.Controllers
         public ActionResult<ProblemModel> Post(ProblemModel problem)
         {
             if (problem == null) return BadRequest();
-            unitOfWork.ProblemRepository.Insert(mapper.Map<Problem>(problem));
-            unitOfWork.Commit();
+            problemService.Create(problem);
             return Ok(problem);
         }
 
@@ -50,19 +48,17 @@ namespace WebApiApp.Controllers
         public ActionResult<ProblemModel> Put([FromBody]ProblemModel problem)
         {
             if (problem == null) return BadRequest();
-            if (!unitOfWork.ProblemRepository.GetAll().Any(p => p.Id == problem.Id)) return NotFound();
-            unitOfWork.ProblemRepository.Update(mapper.Map<Problem>(problem));
-            unitOfWork.Commit();
+            if (!problemService.GetAll().Any(e => e.Id == problem.Id)) return NotFound();
+            problemService.Update(problem);
             return Ok(problem);
         }
 
         [HttpDelete("{Id}")]
         public ActionResult<ProblemModel> Delete(int Id)
         {
-            ProblemModel problem = mapper.Map<ProblemModel>(unitOfWork.ProblemRepository.GetById(Id));
+            ProblemModel problem = problemService.GetById(Id);
             if (problem == null) return NotFound();
-            unitOfWork.ProblemRepository.DeleteById(Id);
-            unitOfWork.Commit();
+            problemService.DeleteById(Id);
             return Ok(problem);
         }
     }

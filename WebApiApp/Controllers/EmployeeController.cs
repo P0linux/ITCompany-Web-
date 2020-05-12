@@ -26,7 +26,7 @@ namespace WebApiApp.Controllers
         }
 
         [HttpGet("{Id}")]
-        public ActionResult<ProblemModel> Get(int Id)
+        public ActionResult<EmployeeModel> Get(int Id)
         {
             EmployeeModel employee = employeeService.GetById(Id);
             if (employee == null) return NotFound();
@@ -84,7 +84,7 @@ namespace WebApiApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult<ProblemModel> Post(EmployeeModel employee)
+        public ActionResult<EmployeeModel> Post(EmployeeModel employee)
         {
             if (employee == null) return BadRequest();
             employeeService.Create(employee);
