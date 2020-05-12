@@ -38,6 +38,7 @@ namespace WebApiApp
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IDepartmentEmployeeService, DepartmentEmployeeService>();
+            services.AddScoped<IProblemService, ProblemService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

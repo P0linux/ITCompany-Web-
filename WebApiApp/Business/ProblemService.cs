@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApiApp.Business.Interfaces;
 using WebApiApp.Data;
 using WebApiApp.Data.Entities;
 using WebApiApp.Models;
 
 namespace WebApiApp.Business
 {
-    public class ProblemService
+    public class ProblemService:IProblemService
     {
         IUnitOfWork unitOfWork;
         IMapper mapper;
