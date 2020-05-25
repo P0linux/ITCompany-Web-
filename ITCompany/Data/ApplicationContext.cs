@@ -1,4 +1,5 @@
 ﻿using ITCompany.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace ITCompany.Data
 {
-    public class ApplicationContext: DbContext
+    public class ApplicationContext: IdentityDbContext<User>
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             :base(options)
         {
-
+            Database.EnsureCreated();
         }
 
         public DbSet<DepartmentEntity> Departments { get; set; }
