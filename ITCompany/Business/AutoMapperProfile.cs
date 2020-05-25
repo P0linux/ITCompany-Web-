@@ -16,6 +16,7 @@ namespace ITCompany.Business
             CreateMap<Employee, EmployeeEntity>().ReverseMap();
             CreateMap<DepartmentEmployee, DepartmentEmployeeEntity>().ReverseMap();
             CreateMap<Problem, ProblemEntity>().ReverseMap();
+            CreateMap<UserRegisterModel, User>();
         } 
     }
 }

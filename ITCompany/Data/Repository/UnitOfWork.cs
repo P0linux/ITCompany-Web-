@@ -15,13 +15,15 @@ namespace ITCompany.Data.Repository
         private ProblemRepository problemRepository;
         private DepartmentEmployeeRepository departmentEmployeeRepository;
 
-        public UnitOfWork(ApplicationContext context, UserManager<User> userManager)
+        public UnitOfWork(ApplicationContext context, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this.context = context;
             UserManager = userManager;
+            SignInManager = signInManager;
         }
 
         public UserManager<User> UserManager { get; }
+        public SignInManager<User> SignInManager { get; set; }
 
         public DepartmentRepository DepartmentRepository
         {
