@@ -56,7 +56,7 @@ namespace ITCompany
                 opt.Password.RequireDigit = false;
                 opt.Password.RequireNonAlphanumeric = false;
                 opt.Password.RequiredLength = 4;
-                opt.User.RequireUniqueEmail = true;
+                //opt.User.RequireUniqueEmail = true;
             })
             .AddEntityFrameworkStores<ApplicationContext>();
         }
