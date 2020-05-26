@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ITCompany.Business.Interfaces
 {
-    interface IUserService
+    public interface IUserService
     {
         Task<IdentityResult> Register(UserRegisterModel userRegisterModel);
         Task<SignInResult> Login(UserLoginModel userLoginModel);

@@ -25,7 +25,7 @@ namespace ITCompany.Business.Services
         }
         public async Task<SignInResult> Login(UserLoginModel userLoginModel)
         {
-            var res = await unit.SignInManager.PasswordSignInAsync(userLoginModel.Email, userLoginModel.Password, false, false);
+            var res = await unit.SignInManager.PasswordSignInAsync(userLoginModel.Email, userLoginModel.Password, userLoginModel.RememberMe, false);
             return res;
         }
 
