@@ -16,7 +16,7 @@ namespace ITCompany.Models
 
         [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
-        public string Passport { get; set; }
+        public string Password { get; set; }
 
         [Compare("Password", ErrorMessage = "Passwords are not equal")]
         [DataType(DataType.Password)]

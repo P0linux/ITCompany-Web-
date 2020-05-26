@@ -9,8 +9,8 @@ namespace ITCompany.Business.Interfaces
 {
     interface IUserService
     {
-        IdentityResult Register(UserRegisterModel userRegisterModel);
-        SignInResult Login(UserLoginModel userLoginModel);
-        void SignOut();
+        Task<IdentityResult> Register(UserRegisterModel userRegisterModel);
+        Task<SignInResult> Login(UserLoginModel userLoginModel);
+        Task SignOut();
     }
 }
