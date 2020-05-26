@@ -66,7 +66,12 @@ namespace ITCompany.Controllers
 
             if (res.Succeeded)
             {
-
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid email or password");
+                return View(model);
             }
         }
 
