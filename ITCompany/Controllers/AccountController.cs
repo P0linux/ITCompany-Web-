@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using ITCompany.Business.Interfaces;
 using ITCompany.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITCompany.Controllers
@@ -63,7 +64,16 @@ namespace ITCompany.Controllers
 
             var res = await userService.Login(model);
 
-            if (!res.Succeeded)
+            if (res.Succeeded)
+            {
+
+            }
+        }
+
+        public async Task<IActionResult> SignOut()
+        {
+            await userService.SignOut();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
