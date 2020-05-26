@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using ITCompany.Business.Interfaces;
 using ITCompany.Business.Services;
 using ITCompany.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITCompany.Controllers
 {
+    [Authorize]
     public class FindEmployeeController : Controller
     {
         IEmployeeService employeeService;
