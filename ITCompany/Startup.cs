@@ -48,6 +48,7 @@ namespace ITCompany
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<IDepartmentService, DepartmentService>();
             services.AddTransient<ICreatorService, CreatorService>();
+            services.AddTransient<IUserService, UserService>();
 
             services.AddIdentity<User, IdentityRole>(opt =>
             {
